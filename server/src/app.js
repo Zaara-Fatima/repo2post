@@ -9,13 +9,19 @@ import authRoutes from "./routes/auth.routes.js"
 import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import repositoryRoutes from "./routes/repository.routes.js"
+import { apiLimiter } from "./middleware/ratelimiter.js";
 
 const app = express();
 
 app.use(cookieParser())
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials:true
+}));
 app.use(express.json());
+
+app.use('/api', apiLimiter)
 
 app.use(requestLogger)
 app.use("/api", health)

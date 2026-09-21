@@ -1,3 +1,10 @@
 export const requestLogger =(req,res,next)=>{
-    console.log(`${Date.now()} ${req.method} ${req.originalUrl}`)
-    next()}
+    
+    const start =  Date.now()
+    next()
+    res.on("finish",()=>{
+        const duration = Date.now() -start
+        console.log(`${duration} ${req.method} ${req.originalUrl} ${res.statusCode}`)
+    })
+    
+}

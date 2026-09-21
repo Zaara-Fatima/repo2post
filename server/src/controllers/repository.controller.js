@@ -3,11 +3,6 @@ import { analyzeRepository, getRepoById, getRepoByUser } from "../services/repos
 export const repoController = async (req,res, next) => {
     try {
         const {url}= req.body
-    if (!url) {
-      return res.status(400).json({
-        message: "GitHub repository URL is required",
-      });
-    }
     const repo =await analyzeRepository(url, req.user.sub)
     res.status(201).json({
         message: "REPO ANALYZE SUCCESSFULL. REPO SAVED",

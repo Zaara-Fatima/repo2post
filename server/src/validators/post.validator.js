@@ -6,3 +6,7 @@ export const generatedPostSchema = z.object({
     hashtags: z.array(z.string()).min(1),
     cta: z.string().min(1)
 })
+
+export const generatePostRequestSchema = z.object({
+    repositoryId: z.string().min(1)
+})

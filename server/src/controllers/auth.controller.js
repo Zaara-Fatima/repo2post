@@ -1,4 +1,5 @@
 import { login, logout, refresh, register } from "../services/auth.service.js";
+import AppError from "../utils/AppError.js";
 
 export const registerController = async (req, res, next) => {
   try {
@@ -44,6 +45,9 @@ export const loginController = async (req, res, next) => {
 export const refreshController = async (req,res,next) => {
   try {
     const refreshToken = req.cookies.refreshToken
+    if (!refreshToken) {
+    throw new AppError("Refresh token required", 401)
+}
   const result = await refresh(refreshToken)
    res.cookie("refreshToken", result.refreshToken,{
     httpOnly: true,
