@@ -18,6 +18,13 @@ export const protect = (req,res,next) => {
         req.user = decoded
         next()
     } catch (error) {
-        next(error)
+        if (error instanceof AppError) {
+        return next(error)
     }
+
+    return next(new AppError("Invalid or expired token", 401))
+    }
+    
 }
+
+

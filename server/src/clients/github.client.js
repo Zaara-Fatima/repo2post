@@ -3,7 +3,7 @@ import AppError from "../utils/AppError.js";
 import createHttpClient from "./http.client.js";
 import { handleGithubError } from "../utils/githubErrorHandler.js";
 
-const githubApi = createHttpClient({
+export const githubApi = createHttpClient({
   baseURL: "https://api.github.com",
   headers: {
     Accept: "application/vnd.github+json",
